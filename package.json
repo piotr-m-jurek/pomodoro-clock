@@ -1,0 +1,18 @@
+{
+  "name": "pomodoro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Piotr Małecki-Jurek <piotr.m.jurek@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "poi index.js --jsx react"
+  },
+  "dependencies": {
+    "material-ui": "^0.20.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "poi-preset-react": "^9.2.1"
+  }
+}
