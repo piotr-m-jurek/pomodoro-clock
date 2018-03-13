@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import { Title } from '@/components/Title';
+import { StyledApp } from '@/components/StyledApp';
 
-
-
-render(<Title text='hello react!'/>, document.getElementById('app'))
+render(<StyledApp />, document.getElementById('app'))

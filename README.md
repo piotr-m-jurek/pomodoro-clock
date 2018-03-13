@@ -6,9 +6,11 @@ Simple pomodoro app
 - [x] Poi
 - [x] React
 - [x] material-ui
+- [x] Typescript
+- [x] Jest
 - [ ] Redux
-- [ ] Typescript
-- [ ] Jest
+- [ ] Husky
+- [ ] Prettier 
 
 ---
 

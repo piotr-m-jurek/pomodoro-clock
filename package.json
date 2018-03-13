@@ -5,7 +5,8 @@
   "author": "Piotr Małecki-Jurek <piotr.m.jurek@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "poi --require ts-node/register --config poi.config.ts"
+    "dev": "poi --require ts-node/register --config poi.config.ts",
+    "test": "jest --watch --no-cache"
   },
   "dependencies": {
     "material-ui": "^1.0.0-beta.37",
@@ -24,9 +25,11 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.4.2",
     "jest-css-modules": "^1.1.0",
+    "node-sass": "^4.7.2",
     "poi": "^9.6.13",
     "poi-preset-react": "^9.2.1",
     "poi-preset-typescript": "^9.0.2",
+    "sass-loader": "^6.0.7",
     "ts-jest": "^22.4.1",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.2"

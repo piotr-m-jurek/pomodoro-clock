@@ -1,2 +1,3 @@
 import * as React from 'react'
-export const Title = ({ text }: {text: string}) => (<h1>{text}</h1>) 
+import * as styles from './Title.module.scss'
+export const Title = ({ text }: {text: string}) => (<h1 className={styles.header}>{text}</h1>) 
