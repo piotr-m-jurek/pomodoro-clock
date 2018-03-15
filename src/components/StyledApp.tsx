@@ -3,16 +3,16 @@ import {
   createMuiTheme,
   MuiThemeProvider
 } from 'material-ui'
-import {
-  pink,
-  blue
-} from 'material-ui/colors'
 import { MainContainer } from '@/components/MainContainer'
+import {
+  cyan,
+  orange
+} from 'material-ui/colors';
 
 const theme = createMuiTheme({
   palette: {
-    primary: pink,
-    secondary: blue
+    primary: cyan,
+    secondary: orange
   }
 })
 
