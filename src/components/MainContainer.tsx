@@ -4,11 +4,12 @@ import {
   Button,
   Toolbar,
   AppBar,
-  Grid,
-  CircularProgress
+  Grid
 } from 'material-ui'
 import { toTimerString } from '@/utils';
 import './MainContainer.scss'
+import { PomodoroProgress } from './PomodoroProgress'
+import { ChangeEvent } from 'react';
 
 const container = {
   height: '100%'
@@ -20,6 +21,7 @@ interface PomodoroState {
   secondsLeft: number
   focusTime: number
   breakTime: number
+  progress: number
 }
 
 export class MainContainer extends React.Component<{}, PomodoroState> {
@@ -30,8 +32,16 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
       isRunning: false,
       secondsLeft: 25 * 60,
       focusTime: 25 * 60,
-      breakTime: 5 * 60
+      breakTime: 5 * 60,
+      progress: 65
     }
+    this.changeProgress = this.changeProgress.bind(this)
+  }
+
+  changeProgress(e: ChangeEvent<HTMLInputElement>) {
+    this.setState({
+      progress: parseInt(e.target.value, 10)
+    })
   }
 
   render () {
@@ -53,13 +63,24 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
           spacing={16}
           >
             <Grid item>
-              <CircularProgress size={100} value={90} variant="static" />
+            <PomodoroProgress radius={150} percentage={this.state.progress}>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="center"
+                  justify="center"
+                  spacing={40}
+                >
+                  <Grid item>
+                    <Typography variant="display2">{toTimerString(this.state.secondsLeft)}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="raised" color="secondary">{this.state.isRunning ? 'Stop' : 'Start'}</Button>
+                  </Grid>
+                </Grid>
+              </PomodoroProgress>
             </Grid>
             <Grid item>
-              <Typography variant="display2">{toTimerString(this.state.secondsLeft)}</Typography>
-            </Grid>
-            <Grid item>
-              <Button variant="raised" color="secondary">{this.state.isRunning ? 'Stop' : 'Start'}</Button>
             </Grid>
         </Grid>
       </Grid>

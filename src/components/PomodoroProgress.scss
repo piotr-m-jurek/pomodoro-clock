@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  right: 0;
+  circle {
+    transition: stroke-dashoffset 300ms linear;
+    stroke: #666;
+    &#bar {
+      stroke: #FF9F1E;
+    }
+  }
+
+}
