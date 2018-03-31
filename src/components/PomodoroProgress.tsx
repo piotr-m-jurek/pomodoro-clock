@@ -2,7 +2,8 @@ import * as React from 'react'
 import './PomodoroProgress.scss'
 
 interface ProgressProps {
-  percentage: number
+  max: number
+  current: number
   radius?: number
   strokeWidth?: number
   children?: JSX.Element
@@ -17,9 +18,10 @@ interface ProgressState {
 export class PomodoroProgress extends React.Component<ProgressProps, ProgressState> {
   constructor (props: ProgressProps) {
     super(props)
+    const {max,  current, radius, strokeWidth } = this.props
     this.state = {
-      progress: (100 - this.props.percentage) / 100 * Math.PI * this.props.radius * 2,
-      sqSize: (this.props.radius * 2) + this.props.strokeWidth
+      progress: current / max * 100,
+      sqSize: (radius * 2) + strokeWidth
     }
   }
 
@@ -27,6 +29,12 @@ export class PomodoroProgress extends React.Component<ProgressProps, ProgressSta
     radius: 100,
     strokeWidth: 10
 
+  }
+
+  componentWillReceiveProps ({current, max} : Partial<ProgressProps>) {
+    this.setState({
+      progress: current / max * 100,
+    })
   }
 
   render () {
@@ -39,7 +47,7 @@ export class PomodoroProgress extends React.Component<ProgressProps, ProgressSta
     }
     const viewBox = `0 0 ${this.state.sqSize} ${this.state.sqSize}`
     const dashArray = this.props.radius * Math.PI * 2
-    const dashOffset = dashArray - dashArray * this.props.percentage / 100
+    const dashOffset = dashArray - dashArray * this.state.progress / 100
 
     return (
       <div className="wrapper" style={dimensions}>
