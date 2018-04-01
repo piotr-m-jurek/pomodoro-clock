@@ -3,16 +3,17 @@ import { Button, Grid } from 'material-ui'
 import Typography from 'material-ui/Typography'
 import { toTimerString } from '@/utils'
 import './MainContainer.scss'
-import { PomodoroProgress } from './PomodoroProgress'
+import { PomodoroProgress } from '@/components/PomodoroProgress'
 import { ApplicationBar } from '@/components/ApplicationBar'
+import { StateButton } from '@/components/StateButton';
 
-const container = {
-  height: '100%'
+let FULL_WORK_TIME = 25 * 60
+let FULL_BREAK_TIME = 5 * 60
+
+interface Session {
+  sessionAmount: number,
+  currentSession: number
 }
-
-const FULL_WORK_TIME = 25 * 60
-const FULL_BREAK_TIME = 5 * 60
-
 
 interface PomodoroState {
   isRunning: boolean
@@ -21,6 +22,8 @@ interface PomodoroState {
   focusTime: number
   breakTime: number
   timerId: number | null
+  sessionInfo: Session
+
 }
 
 const initialState: PomodoroState = {
@@ -29,7 +32,8 @@ const initialState: PomodoroState = {
   secondsLeft: FULL_WORK_TIME,
   focusTime: FULL_WORK_TIME,
   breakTime: FULL_BREAK_TIME,
-  timerId: undefined
+  timerId: undefined,
+  sessionInfo: {sessionAmount: 3, currentSession: 0}
 
 }
 
@@ -38,7 +42,7 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
     super(props)
     this.state = initialState
 
-    this.startTimer = this.startTimer.bind(this)
+    this.toggleCountdown = this.toggleCountdown.bind(this)
     this.toggleTimer = this.toggleTimer.bind(this)
     this.decrease = this.decrease.bind(this)
     this.calculateProgress = this.calculateProgress.bind(this)
@@ -60,7 +64,7 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
     })
   }
 
-  startTimer () {
+  toggleCountdown () {
     if (this.state.timerId != null) {
       this.clearTimerInterval()
     } else {
@@ -84,13 +88,15 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
         secondsLeft: this.state.isBreak ? FULL_WORK_TIME : FULL_BREAK_TIME,
         isBreak: !this.state.isBreak
       })
-      this.startTimer()
+      this.toggleCountdown()
     } else {
       this.setState({
         secondsLeft: this.state.secondsLeft - 1
       })
     }
   }
+
+  
 
   render () {
     const {
@@ -100,8 +106,9 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
       secondsLeft,
       isRunning
     } = this.state
+
     return (
-      <Grid container style={container} spacing={24}>
+      <Grid container style={{height: '100%'}} spacing={24}>
         <ApplicationBar text="Pomodoro" />
         <Grid
           container
@@ -135,11 +142,11 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
                   spacing={8}
                 >
                   <Grid item>
-                    <Button
-                      variant="raised"
-                      color="secondary"
-                      onClick={this.startTimer}
-                    >{isRunning ? 'Stop' : 'Start'}</Button>
+                    <StateButton
+                      handleChange={this.toggleCountdown}
+                      phase={isBreak ? 'Break' : 'Focus'}
+                      isRunning={isRunning}
+                    />
                   </Grid>
                   <Grid item>
                     <Button

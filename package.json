@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "poi --require ts-node/register --config poi.config.ts",
-    "test": "jest --watch --no-cache"
+    "test:unit": "jest --watch --no-cache"
   },
   "dependencies": {
     "material-ui": "^1.0.0-beta.37",

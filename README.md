@@ -5,7 +5,7 @@ Simple pomodoro app
 ## Technologies to be used:
 - [x] Poi
 - [x] React
-- [x] material-ui
+- [x] Material-ui
 - [x] Typescript
 - [x] Jest
 - [ ] Redux
@@ -15,11 +15,16 @@ Simple pomodoro app
 ---
 
 ## Dev
-To install dependencies for this repository
+### To install dependencies for this repository
 ```
-yarn 
+yarn
 ```
-and then to run it in developement mode
+### and then to run it in developement mode
 ```
 yarn dev
+```
+
+### run unit tests
+```
+yarn test:unit
 ```
