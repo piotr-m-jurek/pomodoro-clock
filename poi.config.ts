@@ -7,7 +7,7 @@ const options: Options = {
     require("poi-preset-typescript")()
   ],
   env: {
-    APP_DESCRIPTION: "example app"
+    APP_DESCRIPTION: "Pomodoro App"
   }
 }
 

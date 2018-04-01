@@ -20,25 +20,34 @@ interface PomodoroState {
   secondsLeft: number
   focusTime: number
   breakTime: number
-  timerId?: number
+  timerId: number | null
+}
+
+const initialState: PomodoroState = {
+  isRunning: false,
+  isBreak: false,
+  secondsLeft: FULL_WORK_TIME,
+  focusTime: FULL_WORK_TIME,
+  breakTime: FULL_BREAK_TIME,
+  timerId: undefined
+
 }
 
 export class MainContainer extends React.Component<{}, PomodoroState> {
   constructor (props: {}) {
     super(props)
-    this.state = {
-      isRunning: false,
-      isBreak: false,
-      secondsLeft: FULL_WORK_TIME,
-      focusTime: FULL_WORK_TIME,
-      breakTime: FULL_BREAK_TIME,
-      timerId: undefined
-    }
+    this.state = initialState
+
     this.startTimer = this.startTimer.bind(this)
     this.toggleTimer = this.toggleTimer.bind(this)
     this.decrease = this.decrease.bind(this)
     this.calculateProgress = this.calculateProgress.bind(this)
     this.clearTimerInterval = this.clearTimerInterval.bind(this)
+    this.resetState = this.resetState.bind(this)
+  }
+
+  resetState () {
+    this.setState(initialState)
   }
 
   calculateProgress (): number {
@@ -84,6 +93,13 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
   }
 
   render () {
+    const {
+      isBreak,
+      breakTime,
+      focusTime,
+      secondsLeft,
+      isRunning
+    } = this.state
     return (
       <Grid container style={container} spacing={24}>
         <ApplicationBar text="Pomodoro" />
@@ -93,13 +109,13 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
           direction="column"
           alignItems="center"
           justify="center"
-          spacing={24}
+          spacing={16}
         >
           <Grid item>
             <PomodoroProgress
               radius={150}
-              max={this.state.isBreak ? this.state.breakTime : this.state.focusTime}
-              current={this.state.secondsLeft}
+              max={isBreak ? breakTime : focusTime}
+              current={secondsLeft}
             >
               <Grid
                 container
@@ -109,14 +125,29 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
                 spacing={40}
               >
                 <Grid item>
-                  <Typography variant="display2">{toTimerString(this.state.secondsLeft)}</Typography>
+                  <Typography variant="display2">{toTimerString(secondsLeft)}</Typography>
                 </Grid>
-                <Grid item>
-                  <Button
-                    variant="raised"
-                    color="secondary"
-                    onClick={this.startTimer}
-                  >{this.state.isRunning ? 'Stop' : 'Start'}</Button>
+                <Grid
+                  item
+                  container
+                  direction="row"
+                  justify="center"
+                  spacing={8}
+                >
+                  <Grid item>
+                    <Button
+                      variant="raised"
+                      color="secondary"
+                      onClick={this.startTimer}
+                    >{isRunning ? 'Stop' : 'Start'}</Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="raised"
+                      color="primary"
+                      onClick={this.resetState}
+                    >Reset</Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </PomodoroProgress>

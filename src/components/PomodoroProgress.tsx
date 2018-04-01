@@ -18,7 +18,7 @@ interface ProgressState {
 export class PomodoroProgress extends React.Component<ProgressProps, ProgressState> {
   constructor (props: ProgressProps) {
     super(props)
-    const {max,  current, radius, strokeWidth } = this.props
+    const { max, current, radius, strokeWidth } = this.props
     this.state = {
       progress: current / max * 100,
       sqSize: (radius * 2) + strokeWidth
@@ -31,7 +31,7 @@ export class PomodoroProgress extends React.Component<ProgressProps, ProgressSta
 
   }
 
-  componentWillReceiveProps ({current, max} : Partial<ProgressProps>) {
+  componentWillReceiveProps ({ current, max }: Partial<ProgressProps>) {
     this.setState({
       progress: current / max * 100,
     })
@@ -39,15 +39,13 @@ export class PomodoroProgress extends React.Component<ProgressProps, ProgressSta
 
   render () {
     const { radius, strokeWidth, children } = this.props
-    const { sqSize } = this.state
+    const { sqSize, progress } = this.state
+
     const center = sqSize / 2
-    const dimensions = {
-      width: sqSize,
-      height: sqSize
-    }
-    const viewBox = `0 0 ${this.state.sqSize} ${this.state.sqSize}`
-    const dashArray = this.props.radius * Math.PI * 2
-    const dashOffset = dashArray - dashArray * this.state.progress / 100
+    const dimensions = { width: sqSize, height: sqSize }
+    const viewBox = `0 0 ${sqSize} ${sqSize}`
+    const dashArray = radius * Math.PI * 2
+    const dashOffset = dashArray - dashArray * progress / 100
 
     return (
       <div className="wrapper" style={dimensions}>
