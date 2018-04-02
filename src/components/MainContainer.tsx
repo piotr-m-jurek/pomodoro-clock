@@ -5,7 +5,8 @@ import { toTimerString } from '@/utils'
 import './MainContainer.scss'
 import { PomodoroProgress } from '@/components/PomodoroProgress'
 import { ApplicationBar } from '@/components/ApplicationBar'
-import { StateButton } from '@/components/StateButton';
+import { StateButton } from '@/components/StateButton'
+import TitleWithTheme from '@/components/TitleWithTheme'
 
 let FULL_WORK_TIME = 25 * 60
 let FULL_BREAK_TIME = 5 * 60
@@ -109,15 +110,16 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
 
     return (
       <Grid container style={{height: '100%'}} spacing={24}>
-        <ApplicationBar text="Pomodoro" />
+        <ApplicationBar text='Pomodoro' />
         <Grid
           container
-          className="body"
-          direction="column"
-          alignItems="center"
-          justify="center"
+          className='body'
+          direction='column'
+          alignItems='center'
+          justify='center'
           spacing={16}
         >
+          <TitleWithTheme text='Dupa'/>
           <Grid item>
             <PomodoroProgress
               radius={150}
@@ -126,19 +128,19 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
             >
               <Grid
                 container
-                direction="column"
-                alignItems="center"
-                justify="center"
+                direction='column'
+                alignItems='center'
+                justify='center'
                 spacing={40}
               >
                 <Grid item>
-                  <Typography variant="display2">{toTimerString(secondsLeft)}</Typography>
+                  <Typography variant='display2'>{toTimerString(secondsLeft)}</Typography>
                 </Grid>
                 <Grid
                   item
                   container
-                  direction="row"
-                  justify="center"
+                  direction='row'
+                  justify='center'
                   spacing={8}
                 >
                   <Grid item>
@@ -150,8 +152,8 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
                   </Grid>
                   <Grid item>
                     <Button
-                      variant="raised"
-                      color="primary"
+                      variant='raised'
+                      color='primary'
                       onClick={this.resetState}
                     >Reset</Button>
                   </Grid>

@@ -7,7 +7,7 @@ import { MainContainer } from '@/components/MainContainer'
 import {
   cyan,
   orange
-} from 'material-ui/colors';
+} from 'material-ui/colors'
 
 const theme = createMuiTheme({
   palette: {

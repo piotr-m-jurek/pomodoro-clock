@@ -8,6 +8,6 @@ describe('<Title />', () => {
   })
   it('renders properly to the screen', () => {
     const wrapper = shallow(<Title text='Hello react!' />)
-    expect(wrapper.find('h1').contains("Hello react!")).toEqual(true)
+    expect(wrapper.find('h1').contains('Hello react!')).toEqual(true)
   })
 })

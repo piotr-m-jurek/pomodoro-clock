@@ -1,6 +1,11 @@
 {
   "rules": {
     "class-name": true,
+    "defaultSeverity": "warning",
+    "extends": [
+      "tslint:recommended",
+      "tslint-react"
+    ],
     "no-var-keyword": true,
     "no-use-before-declare": false,
     "no-console": [
@@ -22,6 +27,10 @@
     ],
     "no-string-literal": true,
     "no-switch-case-fall-through": true,
+    "semicolon": [
+      true,
+      "never"
+    ],
     "triple-equals": [
       true,
       "allow-undefined-check",
@@ -36,6 +45,10 @@
     "max-file-line-count": [
       true,
       200
+    ],
+    "quotemark": [
+      true,
+      "single"
     ]
   }
 }

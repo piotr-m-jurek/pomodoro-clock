@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { ApplicationBar } from "@/components/ApplicationBar"
-import { mount } from "enzyme";
+import { ApplicationBar } from '@/components/ApplicationBar'
+import { mount } from 'enzyme'
 
 
 describe('ApplicationBar', () => {
@@ -9,7 +9,7 @@ describe('ApplicationBar', () => {
   })
 
   it('renders properly', () => {
-    const wrapper = mount(<ApplicationBar text="Pomodoro"/>)
+    const wrapper = mount(<ApplicationBar text='Pomodoro'/>)
     expect(wrapper.find('h2').contains('Pomodoro')).toEqual(true)
   })
   
