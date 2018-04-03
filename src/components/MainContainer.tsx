@@ -3,10 +3,9 @@ import { Button, Grid } from 'material-ui'
 import Typography from 'material-ui/Typography'
 import { toTimerString } from '@/utils'
 import './MainContainer.scss'
-import { PomodoroProgress } from '@/components/PomodoroProgress'
+import PomodoroProgress from '@/components/PomodoroProgress'
 import { ApplicationBar } from '@/components/ApplicationBar'
 import { StateButton } from '@/components/StateButton'
-import TitleWithTheme from '@/components/TitleWithTheme'
 
 let FULL_WORK_TIME = 25 * 60
 let FULL_BREAK_TIME = 5 * 60
@@ -52,6 +51,7 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
   }
 
   resetState () {
+    this.clearTimerInterval()
     this.setState(initialState)
   }
 
@@ -123,7 +123,6 @@ export class MainContainer extends React.Component<{}, PomodoroState> {
           justify='center'
           spacing={16}
         >
-          <TitleWithTheme text='Dupa' padding={8} />
           <Grid item>
             <PomodoroProgress
               radius={150}
