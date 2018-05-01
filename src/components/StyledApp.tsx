@@ -1,13 +1,13 @@
-import * as React from 'react'
+import { MainContainer } from '@/components/MainContainer'
 import {
   createMuiTheme,
   MuiThemeProvider
 } from 'material-ui'
-import { MainContainer } from '@/components/MainContainer'
 import {
   cyan,
   orange
 } from 'material-ui/colors'
+import React from 'react'
 
 const theme = createMuiTheme({
   palette: {

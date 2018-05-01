@@ -8,9 +8,11 @@ Simple pomodoro app
 - [x] Material-ui
 - [x] Typescript
 - [x] Jest
-- [ ] Redux
+- [x] Prettier
 - [ ] Husky
-- [ ] Prettier 
+- [ ] Redux
+- [ ] OAuth
+- [ ] Firebase
 
 ---
 

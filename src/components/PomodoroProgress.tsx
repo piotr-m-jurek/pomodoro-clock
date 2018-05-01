@@ -1,9 +1,6 @@
+import { withTheme, WithTheme } from 'material-ui'
 import * as React from 'react'
 import './PomodoroProgress.scss'
-import {
-  withTheme,
-  WithTheme
-} from 'material-ui'
 
 interface ProgressProps {
   max: number
@@ -13,18 +10,13 @@ interface ProgressProps {
   children?: JSX.Element
 }
 
-export const PomodoroProgress: React.SFC<ProgressProps & WithTheme> = (props) => {
-  const {
-    children,
-    current,
-    max,
-    theme
-  } = props
+export const PomodoroProgress: React.SFC<ProgressProps & WithTheme> = props => {
+  const { children, current, max, theme } = props
   // default props
   const strokeWidth = props.strokeWidth || 10
   const radius = props.radius || 100
 
-  const sqSize = (radius * 2) + strokeWidth
+  const sqSize = radius * 2 + strokeWidth
   const progress = current / max * 100
   const center = sqSize / 2
   const dimensions = { width: sqSize, height: sqSize }
@@ -33,36 +25,23 @@ export const PomodoroProgress: React.SFC<ProgressProps & WithTheme> = (props) =>
   const dashOffset = dashArray - dashArray * progress / 100
 
   return (
-    <div className='wrapper' style={ dimensions }>
-      <svg
-        id='svg'
-        width={ sqSize }
-        height={ sqSize }
-        viewBox={ viewBox }
-        version='1.1'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        <circle
-          r={ radius }
-          cx={ center }
-          cy={ center }
-          fill='transparent'
-          strokeWidth={ strokeWidth }
-        />
+    <div className='wrapper' style={dimensions}>
+      <svg id='svg' width={sqSize} height={sqSize} viewBox={viewBox} version='1.1' xmlns='http://www.w3.org/2000/svg'>
+        <circle r={radius} cx={center} cy={center} fill='transparent' strokeWidth={strokeWidth} />
         <circle
           id='bar'
-          style={ { stroke: theme.palette.primary.main } }
-          r={ radius }
-          cx={ center }
-          cy={ center }
+          style={{ stroke: theme.palette.primary.main }}
+          r={radius}
+          cx={center}
+          cy={center}
           fill='transparent'
-          transform={ `rotate(-90 ${center} ${center})` }
-          strokeDasharray={ dashArray }
-          strokeDashoffset={ dashOffset }
-          strokeWidth={ strokeWidth }
+          transform={`rotate(-90 ${center} ${center})`}
+          strokeDasharray={dashArray}
+          strokeDashoffset={dashOffset}
+          strokeWidth={strokeWidth}
         />
       </svg>
-      { children }
+      {children}
     </div>
   )
 }

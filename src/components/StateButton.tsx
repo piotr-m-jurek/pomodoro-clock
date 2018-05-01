@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Button, Grid } from 'material-ui'
+import * as React from 'react'
 
 export const StateButton = (
   {isRunning, phase, handleChange}:

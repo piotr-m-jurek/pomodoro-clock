@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "poi --require ts-node/register --config poi.config.ts",
     "test:unit": "jest --watch --no-cache",
-    "pretty": "prettier --config .prettierrc -l"
+    "pretty": "prettier --write --config .prettierrc -l ./src/*{ts,tsx}"
   },
   "dependencies": {
     "material-ui": "^1.0.0-beta.37",
@@ -24,6 +24,7 @@
     "@types/react-dom": "^16.0.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "husky": "^1.0.0-rc.2",
     "jest": "^22.4.2",
     "jest-css-modules": "^1.1.0",
     "node-sass": "^4.7.2",
@@ -58,6 +59,17 @@
       "jsx",
       "json",
       "node"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn pretty",
+      "git add"
     ]
   }
 }
