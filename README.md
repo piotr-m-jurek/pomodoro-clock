@@ -3,13 +3,14 @@
 Simple pomodoro app
 
 ## Technologies to be used:
+
 - [x] Poi
 - [x] React
 - [x] Material-ui
 - [x] Typescript
 - [x] Jest
 - [x] Prettier
-- [ ] Husky
+- [x] Husky
 - [ ] Redux
 - [ ] OAuth
 - [ ] Firebase

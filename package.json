@@ -63,13 +63,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn pretty"
     }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "yarn pretty",
-      "git add"
-    ]
   }
 }
