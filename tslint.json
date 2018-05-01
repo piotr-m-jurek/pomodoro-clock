@@ -50,5 +50,9 @@
       true,
       "single"
     ]
-  }
+  },
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier"
+  ]
 }
