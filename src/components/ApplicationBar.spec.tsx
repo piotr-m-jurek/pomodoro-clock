@@ -1,6 +1,6 @@
-import * as React from 'react'
 import { ApplicationBar } from '@/components/ApplicationBar'
 import { mount } from 'enzyme'
+import * as React from 'react'
 
 
 describe('ApplicationBar', () => {

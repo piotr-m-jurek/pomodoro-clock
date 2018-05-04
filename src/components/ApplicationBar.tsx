@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Toolbar, AppBar } from 'material-ui'
+import { AppBar, Toolbar } from 'material-ui'
 import Typography from 'material-ui/Typography'
+import * as React from 'react'
 
 export const ApplicationBar = ({ text }: {text: string}) => (
   <AppBar position='fixed'>

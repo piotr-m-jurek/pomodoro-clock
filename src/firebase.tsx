@@ -1,6 +1,6 @@
-import firebase from 'firebase'
+import firebase, { auth, database, initializeApp } from 'firebase'
 
-const config = {
+export const defaultConfig = {
   apiKey: 'AIzaSyD50L6YnNzV3tknbKwzgmoR9LbydQz39Qc',
   authDomain: 'pomodoro-tracker-24366.firebaseapp.com',
   databaseURL: 'https://pomodoro-tracker-24366.firebaseio.com',
@@ -8,9 +8,24 @@ const config = {
   projectId: 'pomodoro-tracker-24366',
   storageBucket: 'pomodoro-tracker-24366.appspot.com'
 }
-firebase.initializeApp(config)
 
-export default config
-export const db = firebase.database()
-export const auth = firebase.auth()
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+export interface FirebaseDb {
+  database: database.Database
+  auth: auth.Auth
+  provider: auth.GoogleAuthProvider
+}
+
+export let db: FirebaseDb
+const getFirebaseDb = (firebaseConfig: typeof defaultConfig = defaultConfig): FirebaseDb => {
+  if (db) {
+    return db
+  }
+  initializeApp(firebaseConfig)
+  return (db = {
+    database: firebase.database(),
+    auth: firebase.auth(),
+    provider: new firebase.auth.GoogleAuthProvider()
+  })
+}
+// TODO: Move to future store
+getFirebaseDb()

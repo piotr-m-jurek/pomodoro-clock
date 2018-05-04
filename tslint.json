@@ -27,6 +27,7 @@
       true,
       "check-function-in-method"
     ],
+    "interface-name": [true, "never-prefix"],
     "no-string-literal": true,
     "no-submodule-imports": false,
     "no-switch-case-fall-through": true,
