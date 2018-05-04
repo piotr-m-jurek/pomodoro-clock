@@ -1,6 +1,6 @@
 // import { MainContainer } from '@/components/MainContainer'
 import { MainContainer } from '@/components/MainContainer'
-import { auth } from '@/firebase'
+import { db } from '@/firebase'
 import { createMuiTheme, MuiThemeProvider } from 'material-ui'
 import { cyan, orange } from 'material-ui/colors'
 import * as React from 'react'
@@ -27,7 +27,7 @@ export default class StyledApp extends React.Component<{}, { currentUser: IUser 
   }
 
   componentDidMount () {
-    auth.onAuthStateChanged(currentUser => {
+    db.auth.onAuthStateChanged(currentUser => {
       this.setState({ currentUser })
     })
 
