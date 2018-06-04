@@ -9,22 +9,22 @@ import './MainContainer.scss'
 const FULL_WORK_TIME = 25 * 60
 const FULL_BREAK_TIME = 5 * 60
 
-interface ISession {
+interface Session {
   sessionAmount: number
   currentSession: number
 }
 
-interface IPomodoroState {
+interface PomodoroState {
   isRunning: boolean
   isBreak: boolean
   secondsLeft: number
   focusTime: number
   breakTime: number
   timerId: number | null
-  sessionInfo: ISession
+  sessionInfo: Session
 }
 
-const initialState: IPomodoroState = {
+const initialState: PomodoroState = {
   isRunning: false,
   isBreak: false,
   secondsLeft: FULL_WORK_TIME,
@@ -34,8 +34,8 @@ const initialState: IPomodoroState = {
   sessionInfo: { sessionAmount: 3, currentSession: 0 }
 }
 
-export class MainContainer extends React.Component<{}, IPomodoroState> {
-  constructor(props: {}) {
+export class MainContainer extends React.Component<any, PomodoroState> {
+  constructor(props: any) {
     super(props)
     this.state = initialState
 
@@ -88,6 +88,7 @@ export class MainContainer extends React.Component<{}, IPomodoroState> {
       })
       this.toggleCountdown()
     } else {
+      this.props.decrementTimer()
       this.setState({
         secondsLeft: this.state.secondsLeft - 1
       })

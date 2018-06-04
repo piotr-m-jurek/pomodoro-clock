@@ -10,13 +10,17 @@
     "pretty": "prettier --write --config .prettierrc -l ./src/*{ts,tsx}"
   },
   "dependencies": {
+    "@types/react-redux": "^5.0.7",
     "firebase": "^4.13.1",
     "material-ui": "^1.0.0-beta.37",
     "material-ui-icons": "^1.0.0-beta.36",
+    "poi-preset-react": "^9.2.1",
+    "poi-preset-typescript": "^9.0.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "poi-preset-react": "^9.2.1",
-    "poi-preset-typescript": "^9.0.2"
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.9",
