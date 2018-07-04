@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "poi --require ts-node/register --config poi.config.ts",
+    "build": "poi build --require ts-node/register --config poi.config.ts",
     "test:unit": "jest --watch --no-cache",
     "pretty": "prettier --write --config .prettierrc -l ./src/*{ts,tsx}"
   },
@@ -65,10 +66,5 @@
       "json",
       "node"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn pretty"
-    }
   }
 }

@@ -6,99 +6,49 @@ import Typography from 'material-ui/Typography'
 import * as React from 'react'
 import './MainContainer.scss'
 
-const FULL_WORK_TIME = 25 * 60
-const FULL_BREAK_TIME = 5 * 60
-
-interface Session {
-  sessionAmount: number
-  currentSession: number
-}
-
-interface PomodoroState {
-  isRunning: boolean
-  isBreak: boolean
-  secondsLeft: number
-  focusTime: number
-  breakTime: number
-  timerId: number | null
-  sessionInfo: Session
-}
-
-const initialState: PomodoroState = {
-  isRunning: false,
-  isBreak: false,
-  secondsLeft: FULL_WORK_TIME,
-  focusTime: FULL_WORK_TIME,
-  breakTime: FULL_BREAK_TIME,
-  timerId: undefined,
-  sessionInfo: { sessionAmount: 3, currentSession: 0 }
-}
-
-export class MainContainer extends React.Component<any, PomodoroState> {
+export class MainContainer extends React.Component<any, {}> {
   constructor(props: any) {
     super(props)
-    this.state = initialState
 
     this.toggleCountdown = this.toggleCountdown.bind(this)
-    this.toggleTimer = this.toggleTimer.bind(this)
     this.decrease = this.decrease.bind(this)
     this.calculateProgress = this.calculateProgress.bind(this)
     this.clearTimerInterval = this.clearTimerInterval.bind(this)
-    this.resetState = this.resetState.bind(this)
-  }
-
-  resetState() {
-    this.clearTimerInterval()
-    this.setState(initialState)
   }
 
   calculateProgress(): number {
-    return this.state.secondsLeft / (this.state.isBreak ? FULL_BREAK_TIME : FULL_WORK_TIME)
-  }
-
-  toggleTimer() {
-    this.setState({
-      isRunning: !this.state.isRunning
-    })
+    return this.props.secondsLeft / (this.props.isBreak ? this.props.breakTime : this.props.focusTime)
   }
 
   toggleCountdown() {
-    if (this.state.timerId != null) {
+    if (this.props.timerId != null) {
       this.clearTimerInterval()
     } else {
-      this.setState({
-        timerId: window.setInterval(this.decrease, 1000)
-      })
+      const id = window.setInterval(this.decrease, 1000)
+      this.props.registerIntervalId(id)
     }
-    this.toggleTimer()
+    this.props.toggleTimer()
   }
 
   clearTimerInterval() {
-    window.clearInterval(this.state.timerId)
-    this.setState({
-      timerId: null
-    })
+    window.clearInterval(this.props.timerId)
+    this.props.clearIntervalId()
   }
 
   decrease() {
-    if (this.state.secondsLeft === 1) {
-      this.setState({
-        secondsLeft: this.state.isBreak ? FULL_WORK_TIME : FULL_BREAK_TIME,
-        isBreak: !this.state.isBreak
-      })
+    if (this.props.secondsLeft === 1) {
       this.toggleCountdown()
+      this.props.toggleBreak()
     } else {
       this.props.decrementTimer()
-      this.setState({
-        secondsLeft: this.state.secondsLeft - 1
-      })
     }
   }
 
   render() {
-    const { isBreak, breakTime, focusTime, secondsLeft, isRunning } = this.state
+    const { isBreak, breakTime, focusTime, secondsLeft, isRunning, resetState } = this.props
 
-    return <Grid container style={{ height: '100%' }} spacing={24}>
+    return (
+      <Grid container style={{ height: '100%' }} spacing={24}>
         <Grid container className='body' direction='column' alignItems='center' justify='center' spacing={16}>
           <Grid item>
             <PomodoroProgress radius={150} max={isBreak ? breakTime : focusTime} current={secondsLeft}>
@@ -115,7 +65,7 @@ export class MainContainer extends React.Component<any, PomodoroState> {
                     />
                   </Grid>
                   <Grid item>
-                    <Button variant='raised' color='primary' onClick={this.resetState}>
+                    <Button variant='raised' color='primary' onClick={resetState}>
                       Reset
                     </Button>
                   </Grid>
@@ -125,5 +75,6 @@ export class MainContainer extends React.Component<any, PomodoroState> {
           </Grid>
         </Grid>
       </Grid>
+    )
   }
 }
